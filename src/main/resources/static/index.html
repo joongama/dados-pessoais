@@ -1,58 +1,216 @@
-<!-- hash-identificacao: 144ae5a5fcc42f423c535384eb71cc0bad1ed4a0e57867376274bc8a75052369 -->
-<!--
-  Arquivo gerado automaticamente pelo TADS Spring Initializr customizado (versão didática).
-  ATENÇÃO: Este arquivo NÃO é gerado pelo Spring Initializr oficial.
--->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dados-pessoais</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 720px; margin: 2.5rem auto; padding: 0 1.25rem 5rem; color: #333; line-height: 1.6; }
-    h1 { color: #6db33f; border-bottom: 2px solid #6db33f; padding-bottom: 0.4rem; margin-bottom: 0.25rem; }
-    h2 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-top: 2rem; margin-bottom: 0.5rem; }
-    a { color: #6db33f; }
-    ul { padding-left: 1.5rem; margin: 0; }
-    li { margin: 0.35rem 0; }
-    .meta { background: #f6f8f6; border: 1px solid #d4e8c4; border-radius: 6px; padding: 1rem 1.25rem; font-size: 0.875rem; }
-    .hash { font-family: monospace; font-size: 0.78rem; word-break: break-all; color: #666; margin: 0.25rem 0 0; }
-    .generated { font-size: 0.8rem; color: #999; margin-top: 0.5rem; }
-    .curiosity { background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #f59e0b; border-radius: 4px; padding: 0.75rem 1rem; margin-top: 2rem; font-size: 0.875rem; color: #78450e; }
-    .curiosity strong { display: block; margin-bottom: 0.25rem; }
-    .site-footer { position: fixed; bottom: 0; left: 0; right: 0; background: #1e2d1e; color: #7a9a7a; font-size: 0.75rem; text-align: center; padding: 0.6rem 1rem; border-top: 1px solid #2e4a2e; }
-    .site-footer a { color: #6db33f; text-decoration: none; }
-    .site-footer a:hover { text-decoration: underline; }
-  </style>
-</head>
-<body>
-  <h1>Dados-pessoais</h1>
-  <p>Projeto de demonstração com Spring Boot</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dados Pessoais</title>
+  </head>
 
-  <h2>Links de apoio do projeto</h2>
-  <ul>
+  <body>
+    <h1>Pessoas</h1>
+    <section>
+      <h2>Lista de Pessoas</h2>
+      <button id="btnListar">Carregar lista</button>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Username</th>
+            <th>E-mail</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="corpoTabela"></tbody>
+      </table>
+    </section>
+    <hr />
+    <section id="secaoEdicao" style="display: none">
+      <h2>Editar Pessoa: <span id="editUsername"></span></h2>
+      <form id="formEdicao">
+        <div>
+          <label for="editNome">Nome:</label>
+          <input type="text" id="editNome" required />
+        </div>
+        <div>
+          <label for="editEmail">E-mail:</label>
+          <input type="email" id="editEmail" required />
+        </div>
+        <div>
+          <label for="editTelefone">Telefone:</label>
+          <input type="text" id="editTelefone" />
+        </div>
+        <div>
+          <label for="editDataNascimento">Data de Nascimento:</label>
+          <input type="date" id="editDataNascimento" required />
+        </div>
+        <div>
+          <strong>Conhecimentos:</strong><br />
+          <label
+            ><input type="checkbox" name="editConhecimentos" value="Java" />
+            Java</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="editConhecimentos"
+              value="Spring Boot"
+            />
+            Spring Boot</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="editConhecimentos"
+              value="JavaScript"
+            />
+            JavaScript</label
+          ><br />
+          <label
+            ><input type="checkbox" name="editConhecimentos" value="Angular" />
+            Angular</label
+          ><br />
+          <label
+            ><input type="checkbox" name="editConhecimentos" value="React" />
+            React</label
+          ><br />
+        </div>
+        <button type="submit">Salvar alterações</button>
+        <button type="button" onclick="fecharFormEdicao()">Cancelar</button>
+      </form>
+    </section>
 
-    <li><a href="https://github.com/ftsuda-senac/dicas-desenvolvimento/blob/main/Dicas-e-Tutoriais-Spring.md" target="_blank" rel="noopener noreferrer">Dicas e Tutoriais Spring</a></li>
-  </ul>
-
-  <div class="curiosity">
-    <strong>🔍 Para pesquisar:</strong>
-    Por que esta página se chama <code>index.html</code>?
-  </div>
-
-  <h2>Identificação do projeto</h2>
-  <div class="meta">
-    <strong>Desenvolvedores:</strong>
-    <ul>
-      <li>João Pedro Gama Nascimento</li>
-    </ul>
-    <p class="hash"><strong>hash-identificacao:</strong> 144ae5a5fcc42f423c535384eb71cc0bad1ed4a0e57867376274bc8a75052369</p>
-    <p class="generated">Gerado em: 22/09/2026, 16:14:56</p>
-  </div>
-
-  <footer class="site-footer">
-    Gerado pelo <a href="https://ftsuda-senac.github.io/tads-spring-initializr/" target="_blank" rel="noopener noreferrer">TADS Spring Initializr</a> — v1.1.8
-  </footer>
-</body>
+    <script>
+      // Busca os dados atuais e pré-preenche o formulário de edição
+      async function abrirFormEdicao(username) {
+        const httpResp = await fetch(`/pessoas/${username}`);
+        if (!httpResp.ok) {
+          alert("Não foi possível carregar os dados para edição.");
+          return;
+        }
+        const p = await httpResp.json();
+        document.getElementById("editUsername").textContent = username;
+        document.getElementById("editNome").value = p.nome;
+        document.getElementById("editEmail").value = p.email;
+        document.getElementById("editTelefone").value = p.telefone ?? "";
+        document.getElementById("editDataNascimento").value = p.dataNascimento;
+        // Marca apenas os checkboxes que a pessoa já possui
+        const checkboxes = document.querySelectorAll(
+          '[name="editConhecimentos"]',
+        );
+        for (const cb of checkboxes) {
+          cb.checked = p.conhecimentos && p.conhecimentos.includes(cb.value);
+        }
+        // Armazena o username no formulário para usar no submit
+        document.getElementById("formEdicao").dataset.username = username;
+        document.getElementById("secaoEdicao").style.display = "block";
+      }
+      function fecharFormEdicao() {
+        document.getElementById("secaoEdicao").style.display = "none";
+      }
+      document
+        .getElementById("formEdicao")
+        .addEventListener("submit", async (evt) => {
+          evt.preventDefault();
+          const username = evt.target.dataset.username;
+          const conhecimentos = [];
+          for (const cb of document.querySelectorAll(
+            '[name="editConhecimentos"]:checked',
+          )) {
+            conhecimentos.push(cb.value);
+          }
+          const dados = {
+            nome: document.getElementById("editNome").value,
+            email: document.getElementById("editEmail").value,
+            telefone: document.getElementById("editTelefone").value,
+            dataNascimento: document.getElementById("editDataNascimento").value,
+            conhecimentos,
+          };
+          const resp = await fetch(`/pessoas/${username}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dados),
+          });
+          if (resp.ok) {
+            alert("Pessoa alterada com sucesso!");
+            fecharFormEdicao();
+            document.getElementById("btnListar").click(); // recarrega a tabela
+          } else {
+            alert("Erro ao alterar: HTTP " + resp.status);
+          }
+        });
+      async function excluirPessoa(username) {
+        const confirmado = window.confirm(
+          `Deseja realmente excluir "${username}"?\nEsta ação não pode ser desfeita.`,
+        );
+        if (!confirmado) return;
+        const resp = await fetch(`/pessoas/${username}`, { method: "DELETE" });
+        if (resp.ok) {
+          alert("Pessoa excluída com sucesso!");
+          document.getElementById("btnListar").click(); // recarrega a tabela
+        } else {
+          alert("Erro ao excluir: HTTP " + resp.status);
+        }
+      }
+      // Buscar e exibir a lista de pessoas
+      document
+        .getElementById("btnListar")
+        .addEventListener("click", async () => {
+          try {
+            const httpResp = await fetch("/pessoas");
+            if (!httpResp.ok) {
+              throw new Error("Erro HTTP " + httpResp.status);
+            }
+            const pessoas = await httpResp.json();
+            const tbody = document.getElementById("corpoTabela");
+            tbody.innerHTML = "";
+            for (const p of pessoas) {
+              tbody.insertAdjacentHTML(
+                "beforeend",
+                `<tr>
+ <td>${p.id}</td>
+ <td>${p.nome}</td>
+ <td>${p.username}</td>
+ <td>${p.email}</td>
+ <td>
+ <button onclick="abrirFormEdicao('${p.username}')">Editar</button>
+ <button onclick="excluirPessoa('${p.username}')">Excluir</button>
+ </td>
+ </tr>`,
+              );
+            }
+          } catch (err) {
+            alert("Erro ao carregar lista: " + err.message);
+          }
+        });
+      // Buscar e exibir dados de uma pessoa pelo username
+      async function getPessoa(username) {
+        try {
+          const httpResp = await fetch(`/pessoas/${username}`);
+          if (!httpResp.ok) {
+            throw new Error("Erro HTTP " + httpResp.status);
+          }
+          const p = await httpResp.json();
+          document.getElementById("nome").textContent = p.nome;
+          document.getElementById("id").textContent = p.id;
+          document.getElementById("username").textContent = p.username;
+          document.getElementById("email").textContent = p.email;
+          document.getElementById("telefone").textContent = p.telefone;
+          document.getElementById("dataNascimento").textContent =
+            p.dataNascimento;
+        } catch (err) {
+          alert("Erro ao buscar pessoa: " + err.message);
+        }
+      }
+      document
+        .getElementById("btnFulano")
+        .addEventListener("click", () => getPessoa("fulano"));
+      document
+        .getElementById("btnCiclano")
+        .addEventListener("click", () => getPessoa("ciclano"));
+      document
+        .getElementById("btnBeltrana")
+        .addEventListener("click", () => getPessoa("beltrana"));
+    </script>
+  </body>
 </html>
