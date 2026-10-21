@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/pessoas")
@@ -34,6 +35,12 @@ public class PessoaController {
     @GetMapping
     public List<PessoaDto> obterPessoas() {
         return pessoaService.obterPessoas();
+    }
+
+    // GET /pessoas/busca?q=<termo>
+    @GetMapping("/busca")
+    public ResponseEntity<List<PessoaDto>> buscarPessoas(@RequestParam("q") String termo) {
+        return ResponseEntity.ok(pessoaService.buscarPessoas(termo));
     }
 
     @GetMapping("/{username}")
