@@ -2,15 +2,22 @@ package br.senac.tads.dsw.dados_pessoais;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import br.senac.tads.dsw.dados_pessoais.entidade.ConhecimentoEntity;
 import br.senac.tads.dsw.dados_pessoais.entidade.PessoaEntity;
+import br.senac.tads.dsw.dados_pessoais.entidade.RoleEntity;
+import br.senac.tads.dsw.dados_pessoais.entidade.UsuarioSistemaEntity;
 import br.senac.tads.dsw.dados_pessoais.repositorio.ConhecimentoRepository;
 import br.senac.tads.dsw.dados_pessoais.repositorio.PessoaRepository;
+import br.senac.tads.dsw.dados_pessoais.repositorio.RoleRepository;
+import br.senac.tads.dsw.dados_pessoais.repositorio.UsuarioSistemaRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +25,20 @@ import org.springframework.transaction.annotation.Transactional;
 public class DataInitializer implements CommandLineRunner {
     private final PessoaRepository pessoaRepository;
     private final ConhecimentoRepository conhecimentoRepository;
+    private final RoleRepository roleRepository;
+    private final UsuarioSistemaRepository usuarioSistemaRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public DataInitializer(PessoaRepository pessoaRepository,
-            ConhecimentoRepository conhecimentoRepository) {
+            ConhecimentoRepository conhecimentoRepository,
+            RoleRepository roleRepository,
+            UsuarioSistemaRepository usuarioSistemaRepository,
+            PasswordEncoder passwordEncoder) {
         this.pessoaRepository = pessoaRepository;
         this.conhecimentoRepository = conhecimentoRepository;
+        this.roleRepository = roleRepository;
+        this.usuarioSistemaRepository = usuarioSistemaRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -83,5 +99,35 @@ public class DataInitializer implements CommandLineRunner {
             p3.getConhecimentos().add(mapConhecimentos.get("SQL"));
             pessoaRepository.save(p3);
         }
+
+        // ===================== NOVO (A.3) =====================
+        // 3. Pré-popula roles e usuários do sistema (somente se a tabela estiver vazia)
+        if (usuarioSistemaRepository.count() == 0) {
+            RoleEntity roleAdmin = roleRepository.save(new RoleEntity("ROLE_ADMIN"));
+            RoleEntity roleGerente = roleRepository.save(new RoleEntity("ROLE_GERENTE"));
+            RoleEntity roleUser = roleRepository.save(new RoleEntity("ROLE_USER"));
+
+            // admin → ADMIN + GERENTE + USER
+            UsuarioSistemaEntity admin = new UsuarioSistemaEntity();
+            admin.setUsername("admin");
+            admin.setSenha(passwordEncoder.encode("Abcd%12345"));
+            admin.setRoles(new HashSet<>(Set.of(roleAdmin, roleGerente, roleUser)));
+            usuarioSistemaRepository.save(admin);
+
+            // user1 → GERENTE + USER
+            UsuarioSistemaEntity user1 = new UsuarioSistemaEntity();
+            user1.setUsername("user1");
+            user1.setSenha(passwordEncoder.encode("Abcd%12345"));
+            user1.setRoles(new HashSet<>(Set.of(roleGerente, roleUser)));
+            usuarioSistemaRepository.save(user1);
+
+            // user2 → USER
+            UsuarioSistemaEntity user2 = new UsuarioSistemaEntity();
+            user2.setUsername("user2");
+            user2.setSenha(passwordEncoder.encode("Abcd%12345"));
+            user2.setRoles(new HashSet<>(Set.of(roleUser)));
+            usuarioSistemaRepository.save(user2);
+        }
+        // ======================================================
     }
 }

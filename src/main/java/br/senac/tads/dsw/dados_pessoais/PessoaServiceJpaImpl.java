@@ -45,6 +45,7 @@ public class PessoaServiceJpaImpl implements PessoaService {
                 .map(ConhecimentoEntity::getNome)
                 // extrai só o nome de cada ConhecimentoEntity
                 .toList();
+        dto.setConhecimentos(nomes);
         return dto;
     }
 
@@ -81,12 +82,7 @@ public class PessoaServiceJpaImpl implements PessoaService {
             PessoaDto dto = toDto(entity); // converte cada PessoaEntity para PessoaDto
             resultado.add(dto);
         }
-        return pessoaRepository.findAll()
-                .stream()
-                .map(this::toDto)
-                // aplica toDto() em cada elemento
-                // coleta o resultado numa List
-                .toList();
+        return resultado;
     }
 
     @Override

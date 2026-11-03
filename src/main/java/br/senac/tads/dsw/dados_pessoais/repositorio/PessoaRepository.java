@@ -22,9 +22,9 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
     //Versão JpaQL: opera sobre campos da entidade Java (não sobre colunas SQL)
     @Query("""
             SELECT p FROM PessoaEntity p
-            WHERE LOWER (p.username) LIKE LOWER (CONCAT('%', :username, '%'))
-            OR(p.nome) LIKE LOWER (CONCAT('%', :username, '%'))
-            OR(p.email) LIKE LOWER (CONCAT('%', :username, '%'))
+            WHERE LOWER (p.username) LIKE LOWER (CONCAT('%', :termo, '%'))
+            OR LOWER (p.nome) LIKE LOWER (CONCAT('%', :termo, '%'))
+            OR LOWER (p.email) LIKE LOWER (CONCAT('%', :termo, '%'))
             """)
     List<PessoaEntity> buscarPorTermo(@Param("termo") String termo);
 }

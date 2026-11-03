@@ -22,6 +22,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaController {
@@ -52,6 +54,7 @@ public class PessoaController {
         return optPessoa.get();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/sem-validacao")
     public ResponseEntity<?> incluirNovo(@RequestBody PessoaDto pessoa) {
         pessoaService.incluirNovaPessoa(pessoa);
@@ -63,6 +66,7 @@ public class PessoaController {
         return ResponseEntity.created(location).build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> incluirNovoComValidacao(@RequestBody @Valid PessoaDto pessoa) {
         // NOTAR O @Valid na linha acima
@@ -77,13 +81,15 @@ public class PessoaController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{username}")
     public ResponseEntity<?> atualizar(@PathVariable("username") String username,
             @RequestBody @Valid PessoaAlteracaoDto pessoa) {
         PessoaDto pessoaAlterada = pessoaService.alterarPessoa(username, pessoa);
         return ResponseEntity.ok().body(pessoaAlterada);
     }
-
+    
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{username}")
     public ResponseEntity<?> remover(@PathVariable("username") String username) {
         pessoaService.removerPessoa(username);

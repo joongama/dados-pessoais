@@ -80,6 +80,22 @@
       </form>
     </section>
 
+    <section>
+      <h2>Buscar pessoa pelo username</h2>
+      <button id="btnFulano">Carregar Fulano</button>
+      <button id="btnCiclano">Carregar Ciclano</button>
+      <button id="btnBeltrana">Carregar Beltrana</button>
+
+      <article>
+        <h3 id="nome">Nome</h3>
+        <p>ID: <strong id="id"></strong></p>
+        <p>Username: <strong id="username"></strong></p>
+        <p>E-mail: <strong id="email"></strong></p>
+        <p>Telefone: <strong id="telefone"></strong></p>
+        <p>Data de Nascimento: <strong id="dataNascimento"></strong></p>
+      </article>
+    </section>
+
     <script>
       // Busca os dados atuais e pré-preenche o formulário de edição
       async function abrirFormEdicao(username) {

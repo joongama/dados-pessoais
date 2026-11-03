@@ -22,7 +22,7 @@ import com.nimbusds.jwt.SignedJWT;
 @Service
 public class JwtService {
 
-    @Value("$(jwt.secret)")
+    @Value("${jwt.secret}")
     private String jwtSecret;
 
     @Value("${jwt.expiracao-segundos:3600}")

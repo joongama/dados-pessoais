@@ -73,6 +73,6 @@ public class PessoaServiceMapImpl implements PessoaService {
 
     @Override
     public List<PessoaDto> buscarPessoas(String termo) {
-        throw new UnsupportedOperationException("Busca não implementada na versão Map");
+        throw new UnsupportedOperationException("Busca não implementada na versão com Map");
     }
 }
